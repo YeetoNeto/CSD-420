@@ -19,7 +19,15 @@ public class App {
         System.out.println("Array before sorting:");
         System.out.println(bubble_comparable);
         System.out.println();
-        Collections.sort(bubble_comparable);
+        for (int i = 0; i < bubble_comparable.size(); i++) {
+            for (int j = 0; j < bubble_comparable.size() - 1 - i; j++) {
+                if (bubble_comparable.get(j).compareTo(bubble_comparable.get(j + 1)) > 0) {
+                    Bubble_Numbers_Comparable temp = bubble_comparable.get(j);
+                    bubble_comparable.set(j, bubble_comparable.get(j + 1));
+                    bubble_comparable.set(j + 1, temp);
+                }
+            }
+        }
         //print array after
         System.out.println("Array after sorting:");
         System.out.println(bubble_comparable);
@@ -33,12 +41,20 @@ public class App {
         for (int i = 0; i < 10; i++) {
             bubble_comparator.add(new Bubble_Numbers((int) (Math.random() * 100)));
         }
+        Comparator<Bubble_Numbers> comparator = (v1, v2) -> Integer.compare(v1.getValue(), v2.getValue());
         //print array before
         System.out.println("Array before sorting:");
         System.out.println(bubble_comparator);
         System.out.println();
-        //Sort with comparator, simplified by lambda
-        Collections.sort(bubble_comparator, (v1, v2) -> Integer.compare(v1.getValue(), v2.getValue()));
+        for (int i = 0; i < bubble_comparator.size(); i++) {
+            for (int j = 0; j < bubble_comparator.size() - 1 - i; j++) {
+                if (comparator.compare(bubble_comparator.get(j), bubble_comparator.get(j + 1)) > 0) {
+                    Bubble_Numbers temp = bubble_comparator.get(j);
+                    bubble_comparator.set(j, bubble_comparator.get(j + 1));
+                    bubble_comparator.set(j + 1, temp);
+                }
+            }
+        }
         //print array after
         System.out.println("Array after sorting:");
         System.out.println(bubble_comparator);
